@@ -1,0 +1,23 @@
+.swiper-container {
+    width: 100%;
+    height: 500px;
+    perspective: 1200px;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+    opacity: 0.6;
+    transform: scale(0.9);
+}
+
+.swiper-slide-active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.swiper-slide img {
+    border-radius: 50%;
+}

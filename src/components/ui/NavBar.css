@@ -1,0 +1,46 @@
+/* src/components/NavBar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2); /* Transparent white */
+    color: #000000;
+    padding: 1rem;
+    backdrop-filter: blur(1px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for added contrast */
+    border-radius: 8px; /* Rounds corners slightly */
+}
+
+.navbar-logo h1 {
+    margin: 0;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.navbar-links li {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links a, .logout-button {
+    color: #3E2723;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.navbar-links a:hover, .logout-button:hover {
+    color: #ffffff;
+}
+
+.logout-button {
+    padding: 0;
+}

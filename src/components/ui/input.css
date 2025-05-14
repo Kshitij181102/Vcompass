@@ -1,0 +1,19 @@
+.ui_input {
+    padding: 0.6rem;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Lighter border color */
+    outline: 0;
+    border-radius: 8px;
+    transition: all 0.2s;
+    width: 100%;
+    color: #000000; /* Text color for readability */
+}
+
+.ui_input:hover {
+    border-color: #A17F59;
+}
+
+.ui_input:focus {
+    border-color:#A17F59;
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly more opaque when focused */
+}
