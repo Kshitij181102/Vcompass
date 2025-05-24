@@ -2,7 +2,7 @@
 
 
 const apis=()=>{
-    const local='http://localhost:5555/';
+    const local='https://vcompass-backend.vercel.app/';
     
 
     const list={
