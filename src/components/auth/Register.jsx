@@ -6,16 +6,8 @@ import Input from "../ui/Input";
 import LoadingButton from "../ui/LoadingButton";
 import BackToLogin from "../ui/BackToLogin";
 import Button from "../ui/Button";
-// UI Components
+import apis from "../../utils/apis";
 
-
-
-// API route
-const apis = () => ({
-  registerUser: '/api/register'
-});
-
-// Toast mock (use real toast library in production)
 const toast = {
   error: (msg) => alert("❌ " + msg),
   success: (msg) => alert("✅ " + msg)
