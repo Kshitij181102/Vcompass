@@ -2,7 +2,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url('../../Assets/back.jpg');
+  /* Warm amber/orange gradient background */
+  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fef9c3 100%);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -17,12 +18,15 @@ body {
   width: 95%;
   max-width: 500px;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(2px);
+  /* Glassmorphism with warm tones */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(254, 243, 199, 0.5) 50%, rgba(255, 255, 255, 0.8) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 1.2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Warm amber shadow */
+  box-shadow: 0 8px 32px rgba(245, 158, 11, 0.15), 0 4px 20px rgba(251, 146, 60, 0.1);
   overflow-y: auto;
-  max-height: 90vh; /* prevent overflow on short screens */
+  max-height: 90vh;
 }
 
 .auth_header {
@@ -36,18 +40,24 @@ body {
 .logo {
   width: 64px;
   height: 64px;
+  /* Subtle amber glow */
+  filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.2));
 }
 
 .auth_heading {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #713f12;
+  /* Primary text color - warm amber */
+  color: #78350f;
   margin-bottom: 6px;
+  text-shadow: 0 2px 4px rgba(245, 158, 11, 0.1);
 }
 
 .auth_title {
   font-size: 13px;
-  color: #713f12;
+  /* Secondary text color */
+  color: #b45309;
+  opacity: 0.8;
 }
 
 .auth_item {
@@ -57,7 +67,8 @@ body {
 }
 
 .auth_item label {
-  color: #713f12;
+  /* Secondary text color */
+  color: #b45309;
   font-size: 13px;
   font-weight: 500;
   margin-bottom: 4px;
@@ -90,10 +101,17 @@ body {
 
 .auth_options a {
   text-decoration: none;
+  /* Link colors */
+  color: #b45309;
+  transition: color 0.2s ease;
+}
+
+.auth_options a:hover {
+  color: #92400e;
 }
 
 .nike {
-  color: #713f12;
+  color: #b45309;
 }
 
 .otp_input_container {
@@ -106,11 +124,26 @@ body {
 .otp_input {
   text-align: center;
   font-weight: 600;
+  /* Input styling */
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  border-radius: 6px;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: #78350f;
+  transition: all 0.2s ease;
+}
+
+.otp_input:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .timer {
-  color: #713f12;
+  color: #b45309;
   font-size: 13px;
+  opacity: 0.8;
 }
 
 .auth_inner {
@@ -121,10 +154,104 @@ body {
 }
 
 .otp_resend_action {
-  color: #713f12;
+  color: #b45309;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.otp_resend_action:hover {
+  color: #92400e;
+}
+
+/* Button styles */
+.btn, button, input[type="submit"] {
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.btn:hover, button:hover, input[type="submit"]:hover {
+  background: linear-gradient(135deg, #d97706 0%, #c2410c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Input field styles */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="tel"], 
+select, 
+textarea {
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  border-radius: 6px;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: #78350f;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="password"]:focus, 
+input[type="tel"]:focus, 
+select:focus, 
+textarea:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+input::placeholder, 
+textarea::placeholder {
+  color: rgba(180, 83, 9, 0.6);
+}
+
+/* Required field indicators */
+.required::after {
+  content: " *";
+  color: #ef4444;
+}
+
+/* Floating orbs for decoration */
+body::before {
+  content: '';
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(254, 215, 170, 0.2) 100%);
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(234, 88, 12, 0.15) 100%);
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Responsive */
@@ -167,3 +294,23 @@ body {
   width: 100%;
 }
 
+/* Card backgrounds */
+.card, .form_card {
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.5) 0%, transparent 50%, rgba(255, 237, 213, 0.3) 100%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.1);
+}
+
+/* Icon colors */
+.icon {
+  color: rgba(180, 83, 9, 0.6);
+  transition: color 0.2s ease;
+}
+
+.icon:focus,
+.icon:hover {
+  color: #b45309;
+}

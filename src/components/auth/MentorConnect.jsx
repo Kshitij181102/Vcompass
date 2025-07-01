@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../ui/NavBar';
+
 import apis from "../../utils/apis";
 import toast from "react-hot-toast";
 import './card.css';
 import Footer from "../ui/Footer";
+import Navbar from '../ui/NavBar';
 
 const MentorConnect = () => {
     const [data, setData] = useState([]);

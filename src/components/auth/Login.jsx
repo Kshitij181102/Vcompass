@@ -15,11 +15,11 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const emailChange = (event) => setEmail(event.target.value);
-  const passwordChange = (event) => setPassword(event.target.value);
+  const emailChange = (e) => setEmail(e.target.value);
+  const passwordChange = (e) => setPassword(e.target.value);
 
-  const submitHandler = async (event) => {
-    event.preventDefault();
+  const submitHandler = async (e) => {
+    e.preventDefault();
     try {
       setLoading(true);
       const response = await fetch(apis().loginUser, {
@@ -32,25 +32,25 @@ const Login = () => {
       setLoading(false);
 
       if (!response.ok) {
-        toast.error(result?.message);
+        toast.error(result?.message || "Login failed");
         return;
       }
 
       if (result?.status && result?.token) {
-        toast.success(result.message);
+        toast.success(result.message || "Login successful");
         localStorage.setItem("accessToken", result.token);
         localStorage.setItem("disId", result.disId);
         navigate("/main");
       }
-    } catch (error) {
-      toast.error(error.message);
+    } catch (err) {
+      toast.error(err.message || "Something went wrong");
       setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Decorative blurred gradients */}
+      {/* Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-amber-200/30 to-orange-300/20 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-yellow-200/30 to-amber-300/20 rounded-full blur-3xl"></div>
@@ -59,41 +59,41 @@ const Login = () => {
 
       <form onSubmit={submitHandler} className="w-full max-w-md z-10">
         <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-8 relative overflow-hidden">
-          <div className="text-center mb-8 relative z-10">
-  <div className="flex justify-center mb-3">
-    <img src={logo} alt="Logo" className="w-20 h-20 object-contain" />
-  </div>
-  <h1 className="text-3xl font-bold text-amber-900 mb-2">Welcome Back</h1>
-  <p className="text-amber-700/80 text-sm font-medium">Login to continue</p>
-</div>
+          <div className="text-center mb-8">
+            <div className="flex justify-center mb-3">
+              <img src={logo} alt="Logo" className="w-20 h-20 object-contain" />
+            </div>
+            <h1 className="text-3xl font-bold text-amber-900 mb-2">Welcome Back</h1>
+            <p className="text-amber-700/80 text-sm font-medium">Login to continue</p>
+          </div>
 
-
-          {/* Email field */}
-          <div className="mb-6 relative z-10">
+          {/* Email Field */}
+          <div className="mb-6">
             <label className="block text-sm font-semibold text-amber-900 mb-1">
               Email Address <span className="text-red-500">*</span>
             </label>
             <Input
-              onChange={emailChange}
               type="email"
-              required
               placeholder="Enter your email"
               value={email}
+              onChange={emailChange}
+              required
             />
           </div>
 
-          {/* Password field */}
-          <div className="mb-6 relative z-10">
+          {/* Password Field */}
+          <div className="mb-6 relative">
             <label className="block text-sm font-semibold text-amber-900 mb-1">
               Password <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <Input
-                onChange={passwordChange}
                 type={showPassword ? "text" : "password"}
-                required
                 placeholder="Enter your password"
                 value={password}
+                onChange={passwordChange}
+                required
+                className="pr-10"
               />
               <button
                 type="button"
@@ -107,14 +107,14 @@ const Login = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="relative z-10 mt-6">
-            <Button>
+          <div className="mt-6">
+            <Button type="submit">
               <LoadingButton loading={loading} title="Login" />
             </Button>
           </div>
 
           {/* Links */}
-          <div className="mt-6 flex flex-col sm:flex-row justify-between text-sm relative z-10">
+          <div className="mt-6 flex flex-col sm:flex-row justify-between text-sm">
             <Link
               to="/register"
               className="text-amber-700 hover:text-amber-800 font-medium hover:underline"
