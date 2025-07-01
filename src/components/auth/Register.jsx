@@ -8,7 +8,6 @@ import BackToLogin from "../ui/BackToLogin";
 import Button from "../ui/Button";
 // UI Components
 
-// Replace with your actual logo image import
 
 
 // API route

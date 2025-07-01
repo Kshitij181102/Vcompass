@@ -10,9 +10,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(to bottom right, #fff8e1, #fff3e0, #fffde7);
     min-height: 100vh;
-    color: #ffffff;
+    color: #78350f;
   }
 `;
 
@@ -22,31 +22,15 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  
-  @media (max-width: 768px) {
-    padding: 20px 15px;
-  }
+  background: linear-gradient(to bottom right, #fff8e1, #fff3e0, #fffde7);
 `;
 
 const Heading = styled.h1`
   font-size: 3.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #78350f;
   text-align: center;
   margin-bottom: 60px;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  letter-spacing: -1px;
-  
-  @media (max-width: 768px) {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 2rem;
-    margin-bottom: 30px;
-  }
 `;
 
 const Container = styled.div`
@@ -55,7 +39,6 @@ const Container = styled.div`
   gap: 60px;
   max-width: 1200px;
   width: 100%;
-  
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -63,34 +46,12 @@ const Container = styled.div`
 `;
 
 const Section = styled.section`
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.15);
-  }
-  
-  @media (max-width: 768px) {
-    padding: 30px;
-  }
-  
-  @media (max-width: 480px) {
-    padding: 20px;
-  }
-`;
-
-const SliderSection = styled(Section)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  box-shadow: 0 20px 40px rgba(255, 193, 7, 0.2);
 `;
 
 const CarouselWrapper = styled.div`
@@ -99,7 +60,7 @@ const CarouselWrapper = styled.div`
   margin-bottom: 30px;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2);
 
   .carousel-item img,
   .carousel-item video {
@@ -107,71 +68,23 @@ const CarouselWrapper = styled.div`
     height: 100%;
     object-fit: cover;
   }
-  
-  .carousel-control-prev,
-  .carousel-control-next {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .carousel-control-prev {
-    left: 15px;
-  }
-  
-  .carousel-control-next {
-    right: 15px;
-  }
-  
-  .carousel-indicators {
-    bottom: 15px;
-  }
-  
-  .carousel-indicators [data-bs-target] {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-  }
-  
-  @media (max-width: 768px) {
-    height: 280px;
-  }
-  
-  @media (max-width: 480px) {
-    height: 220px;
-  }
 `;
 
 const GetStartedButton = styled.button`
   padding: 15px 40px;
   font-size: 1.1rem;
   font-weight: 600;
-  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-  color: #ffffff;
+  background: linear-gradient(to right, #f59e0b, #f97316);
+  color: white;
   border: none;
-  border-radius: 50px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(238, 90, 82, 0.3);
-  font-family: 'Inter', sans-serif;
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.3);
 
   &:hover {
-    background: linear-gradient(135deg, #ff5252, #e53935);
+    background: linear-gradient(to right, #d97706, #ea580c);
     transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(238, 90, 82, 0.4);
-  }
-  
-  &:active {
-    transform: translateY(-1px);
-  }
-  
-  @media (max-width: 480px) {
-    padding: 12px 30px;
-    font-size: 1rem;
   }
 `;
 
@@ -185,25 +98,12 @@ const ContentBlock = styled.div`
   h2 {
     font-size: 1.75rem;
     font-weight: 600;
-    color: #ffffff;
+    color: #78350f;
     margin-bottom: 15px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
-    @media (max-width: 480px) {
-      font-size: 1.5rem;
-    }
   }
-
   p {
     font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 400;
-    
-    @media (max-width: 480px) {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
+    color: rgba(120, 53, 15, 0.8);
   }
 `;
 
@@ -211,50 +111,30 @@ const FeatureGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  margin-top: 20px;
-  
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
 `;
 
 const FeatureCard = styled.div`
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 193, 7, 0.3);
   text-align: center;
   transition: all 0.3s ease;
-  
+
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 236, 179, 0.5);
     transform: translateY(-2px);
   }
-  
+
   h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #ffffff;
+    color: #78350f;
     margin-bottom: 8px;
   }
-  
   p {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
-  }
-  
-  @media (max-width: 480px) {
-    padding: 15px;
-    
-    h3 {
-      font-size: 1rem;
-    }
-    
-    p {
-      font-size: 0.85rem;
-    }
+    color: rgba(120, 53, 15, 0.75);
   }
 `;
 
@@ -271,8 +151,7 @@ const Main = () => {
       <PageContainer>
         <Heading>V-Compass</Heading>
         <Container>
-          {/* Left Section */}
-          <SliderSection>
+          <Section>
             <CarouselWrapper>
               <Carousel>
                 <Carousel.Item>
@@ -293,9 +172,8 @@ const Main = () => {
             <GetStartedButton onClick={handleGetStarted}>
               Get Started
             </GetStartedButton>
-          </SliderSection>
+          </Section>
 
-          {/* Right Section */}
           <ContentSection>
             <ContentBlock>
               <h2>About Us</h2>
