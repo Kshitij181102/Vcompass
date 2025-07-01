@@ -7,11 +7,7 @@ import LoadingButton from "../ui/LoadingButton";
 import BackToLogin from "../ui/BackToLogin";
 import Button from "../ui/Button";
 import apis from "../../utils/apis";
-
-const toast = {
-  error: (msg) => alert("❌ " + msg),
-  success: (msg) => alert("✅ " + msg)
-};
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
