@@ -1,28 +1,31 @@
-*{
-    margin:0;
-    padding:0;
-
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
 }
 
+/* Import Inter from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Arima:wght@600&display=swap');
+/* Global styles */
 body {
-    background-image: url('./Assets/back.jpg'); /* Replace with your image URL */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    margin: 0;
-    font-family: "Arima", system-ui;
-   
+  background-image: url('./Assets/back.jpg'); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif; /* Updated font here */
 }
 
+/* Remove number input spinners */
 input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin:0;
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
+/* Tailwind base imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

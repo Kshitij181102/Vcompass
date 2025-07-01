@@ -1,25 +1,28 @@
 .back_toLogin_ui {
-    background-color: transparent;
-    padding: 0.8rem;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.2rem;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: rgb(255, 255, 255);
-    font-weight: 500;
-    backdrop-filter: blur(1px);
-    border: 1px solid #73533E; /* Optional: border to give it an outline */
+  background-color: rgba(255, 255, 255, 0.1); /* semi-transparent warm tone */
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #713f12; /* deep amber text */
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(4px);
+  border: 1.5px solid #f1c27d; /* soft amber border */
 }
 
 .back_toLogin_ui:hover {
-    background-color: #EAC283; /* Background color on hover */
-    color: #EFDABA; /* Text color on hover */
+  background-color: #facc15; /* hover amber-400 */
+  color: #fff; /* white text on hover */
 }
 
 .back_toLogin_ui svg {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
+  color: inherit;
+  transition: color 0.3s ease;
 }

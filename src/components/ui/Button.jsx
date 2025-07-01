@@ -1,11 +1,16 @@
-import React from 'react'
-import './Button.css'
-const Button = ({onClick,type,children}) => {
-  return (
-<button className="ui_button text-black border-2 "onClick={onClick} type={type} >
-{children}
-</button>
-  )
-}
+import React from 'react';
+import './Button.css';
 
-export default Button
+const Button = ({ onClick, type = "button", children }) => {
+  return (
+    <button
+      className="ui_button"
+      onClick={onClick}
+      type={type}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;

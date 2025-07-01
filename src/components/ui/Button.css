@@ -1,21 +1,30 @@
 .ui_button {
-    width: 100%;
-    padding: 0.8rem;
-    outline: none;
-    border: 1px solid #73533E;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-    cursor: pointer;
-    color: #573522;
-    transition: all 0.2s;
+  width: 100%;
+  padding: 0.8rem;
+  outline: none;
+  border: none;
+  border-radius: 0.75rem; /* rounded-xl */
+  background: linear-gradient(to right, #f59e0b, #f97316); /* amber-500 to orange-500 */
+  cursor: pointer;
+  color: #ffffff; /* white text */
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(251, 191, 36, 0.2); /* amber glow */
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-/* Hover effect with a slight color overlay */
+/* Hover effect */
 .ui_button:hover {
-    background-color: #EAC283; /* Transparent red */
+  background: linear-gradient(to right, #d97706, #ea580c); /* darker amber-600 to orange-600 */
+  transform: scale(1.02);
+  box-shadow: 0 12px 18px -4px rgba(251, 146, 60, 0.3);
 }
 
-/* Active effect with a different transparent color */
+/* Active effect */
 .ui_button:active {
-    background-color: #EAC283; /* Transparent orange */
+  background: linear-gradient(to right, #d97706, #ea580c);
+  transform: scale(0.98);
 }

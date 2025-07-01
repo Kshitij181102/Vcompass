@@ -1,32 +1,52 @@
-// src/components/Navbar.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import logo from '../../Assets/logo.png';
 
 const Navbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
         window.location.href = '/login';
     };
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
     return (
-        <nav className="navbar flex justify-between items-center p-2 bg-[rgba(161,127,89,0.5)]"> {/* Reduced padding to decrease height */}
-            <div className="navbar-logo flex flex-row items-center gap-2">
-                <img src={logo} alt="" className='h-8 w-8 mr-1'/> {/* Adjusted logo height */}
-                <h1 className="text-[#3E2723] font-extrabold text-lg">V-Compass</h1> {/* Adjusted font size */}
+        <nav className="navbar">
+            <div className="navbar-container">
+                <div className="navbar-logo">
+                    <img src={logo} alt="V-Compass Logo" className="logo" />
+                    <h1>V-Compass</h1>
+                </div>
+
+                <div className="hamburger" onClick={toggleMenu}>
+                    <span className={`bar ${isMenuOpen ? 'active' : ''}`}></span>
+                    <span className={`bar ${isMenuOpen ? 'active' : ''}`}></span>
+                    <span className={`bar ${isMenuOpen ? 'active' : ''}`}></span>
+                </div>
+
+                <ul className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+                    <li>
+                        <Link to="/main" onClick={closeMenu}>Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/mentor/connect" onClick={closeMenu}>Connect</Link>
+                    </li>
+                    <li>
+                        <button onClick={() => { handleLogout(); closeMenu(); }} className="logout-button">
+                            Logout
+                        </button>
+                    </li>
+                </ul>
             </div>
-            <ul className="navbar-links flex gap-8 text-[#3E2723]"> {/* Adjusted gap between links */}
-                <li>
-                    <Link to="/main" className=" text-[#3E2723] font-extrbold" >Home</Link>
-                </li>
-                <li>
-                    <Link to="/mentor/connect" className=" text-[#3E2723] font-extrbold">Mentor Connect</Link>
-                </li>
-                <li>
-                    <button onClick={handleLogout} className="logout-button text-[#3E2723] font-extrabold">Logout</button>
-                </li>
-            </ul>
         </nav>
     );
 };

@@ -1,18 +1,15 @@
-import React from 'react'
-import Spinner from './Spinner'
-const LoadingButton = ({loading,title}) => {
-  return (
-    <div className="auth_inner">
-        <span>
-            {
-                loading ? "please wait...":title
-            }
-        </span>
-        {
-            loading && <Spinner/>
-        }
-    </div>
-  )
-}
+import React from 'react';
+import Spinner from './Spinner';
 
-export default LoadingButton
+const LoadingButton = ({ loading, title }) => {
+  return (
+    <div className="flex items-center justify-center space-x-2">
+      {loading && <Spinner />}
+      <span className="text-white font-medium">
+        {loading ? "Please wait..." : title}
+      </span>
+    </div>
+  );
+};
+
+export default LoadingButton;

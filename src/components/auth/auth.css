@@ -1,142 +1,169 @@
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-image: url('../../Assets/back.jpg'); /* Replace this with actual image path */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url('../../Assets/back.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: 'Inter', sans-serif;
 }
 
 .auth_main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 500px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(2px);
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.auth_container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 500px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  padding: 1.2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 90vh; /* prevent overflow on short screens */
 }
 
 .auth_header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .logo {
-    width: 80px;
-    height: 80px;
+  width: 64px;
+  height: 64px;
 }
 
 .auth_heading {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #713f12;
-    margin-bottom: 10px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #713f12;
+  margin-bottom: 6px;
 }
 
 .auth_title {
-    font-size: 14px;
-    color: #713f12;
+  font-size: 13px;
+  color: #713f12;
 }
 
 .auth_item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .auth_item label {
-    color: #713f12;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 5px;
+  color: #713f12;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
 }
 
 .form_fields_container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0;
 }
 
 .auth_action {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .auth_footer {
-    text-align: center;
+  text-align: center;
 }
 
 .auth_options {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
-    font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-size: 13px;
 }
 
 .auth_options a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .nike {
-    color: white;
+  color: #713f12;
 }
 
 .otp_input_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
 }
 
 .otp_input {
-    text-align: center;
-    font-weight: 600;
+  text-align: center;
+  font-weight: 600;
 }
 
 .timer {
-    color: white;
-    font-size: 14px;
+  color: #713f12;
+  font-size: 13px;
 }
 
 .auth_inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
 }
 
 .otp_resend_action {
-    color: white;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
+  color: #713f12;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-    .auth_main {
-        padding: 1rem;
-    }
+  .auth_main {
+    padding: 1rem;
+  }
 
-    .auth_heading {
-        font-size: 1.6rem;
-    }
+  .auth_heading {
+    font-size: 1.4rem;
+  }
+
+  .auth_title {
+    font-size: 12px;
+  }
+
+  .auth_options {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+.form_fields_container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.form_column {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form_item {
+  position: relative;
+  width: 100%;
 }
 

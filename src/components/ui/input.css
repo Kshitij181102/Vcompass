@@ -1,19 +1,27 @@
 .ui_input {
-    padding: 0.6rem;
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Lighter border color */
-    outline: 0;
-    border-radius: 8px;
-    transition: all 0.2s;
-    width: 100%;
-    color: #000000; /* Text color for readability */
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 255, 255, 0.6); /* Slightly translucent white */
+  border: 2px solid rgba(245, 158, 11, 0.3); /* amber-400 base border */
+  border-radius: 0.75rem; /* Tailwind's rounded-xl */
+  outline: none;
+  color: #78350f; /* Deep amber-900 text */
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.05);
+  backdrop-filter: blur(4px);
+  ::placeholder {
+    color: #92400eaa; /* amber-700 placeholder */
+  }
 }
 
 .ui_input:hover {
-    border-color: #A17F59;
+  border-color: #f59e0b; /* amber-500 */
 }
 
 .ui_input:focus {
-    border-color:#A17F59;
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly more opaque when focused */
+  border-color: #f59e0b; /* amber-500 */
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.2); /* amber ring */
 }
