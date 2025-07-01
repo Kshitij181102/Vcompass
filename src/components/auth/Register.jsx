@@ -2,44 +2,11 @@ import React, { useState } from "react";
 import { Eye, EyeOff, User, Mail, Lock, MessageSquare, ArrowRight, Shield, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import logo from "../../Assets/logo.png"
-
+import Input from "../ui/Input";
+import LoadingButton from "../ui/LoadingButton";
+import BackToLogin from "../ui/BackToLogin";
+import Button from "../ui/Button";
 // UI Components
-const Button = ({ children, className, type, ...props }) => (
-  <button 
-    type={type}
-    className={`bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
-    {...props}
-  >
-    {children}
-  </button>
-);
-
-const Input = ({ className, ...props }) => (
-  <input 
-    className={`w-full border border-amber-200/50 rounded-xl bg-white/90 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-200 transition-all duration-200 text-amber-900 placeholder-amber-600/50 ${className}`}
-    {...props}
-  />
-);
-
-const LoadingButton = ({ loading, title }) => (
-  <div className="flex items-center justify-center">
-    {loading ? (
-      <>
-        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-        Creating Account...
-      </>
-    ) : (
-      title
-    )}
-  </div>
-);
-
-const BackToLogin = () => (
-  <a href="/login" className="text-amber-600 hover:text-amber-700 font-medium text-sm transition-colors duration-200 flex items-center justify-center gap-2 group">
-    Already have an account? 
-    <span className="group-hover:underline">Sign in</span>
-  </a>
-);
 
 // Replace with your actual logo image import
 
