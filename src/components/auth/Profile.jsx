@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, BookOpen, Phone, Mail, Lock, GraduationCap, Calendar, Users, Save, Eye, EyeOff } from 'lucide-react';
+import { User, Phone, Mail, Lock, GraduationCap, Save, Eye, EyeOff } from 'lucide-react';
 
 import apis from '../../utils/apis';
 
@@ -25,7 +25,6 @@ const Profile = () => {
         }
     });
 
-    const [originalData, setOriginalData] = useState({});
 
     useEffect(() => {
         fetchUserProfile();
@@ -62,7 +61,7 @@ const Profile = () => {
                     }
                 };
                 setFormData(userData);
-                setOriginalData(userData);
+                
             }
         } catch (error) {
             console.error('Error fetching profile:', error);

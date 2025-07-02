@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Eye, EyeOff, User, Mail, Lock, MessageSquare, ArrowRight, Shield, CheckCircle } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Lock, MessageSquare, ArrowRight, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import logo from "../../Assets/logo.png"
 import Input from "../ui/Input";
