@@ -9,6 +9,8 @@ import Super from './components/Super';
 import MainPage from './components/auth/MainPage';
 import MentorConnect from './components/auth/MentorConnect';
 import Main from './components/auth/Main';
+import Profile from './components/auth/Profile';
+import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
@@ -19,22 +21,22 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/forget/password" element={<ForgetPassword />} />
       
-      <Route
-        path="/main"
-        element={
-          <ProtectedRoute>
-            <MainPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/mentor/connect"
-        element={
-          <ProtectedRoute>
-            <MentorConnect />
-          </ProtectedRoute>
-        }
-      />
+      
+
+
+
+<Route
+  element={
+    <ProtectedRoute>
+      <Layout />
+    </ProtectedRoute>
+  }
+>
+  <Route path="/main" element={<MainPage />} />
+  <Route path="/mentor/connect" element={<MentorConnect />} />
+  <Route path="/profile" element={<Profile />} />
+</Route>
+
 
       <Route element={<Super />}>
         <Route path="/otp/verify" element={<VerifyOtp />} />

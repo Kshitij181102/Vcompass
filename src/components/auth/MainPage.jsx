@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apis from '../../utils/apis'; // Adjust import path as needed
-import Footer from "../ui/Footer";
-import Navbar from '../ui/NavBar';
+
 
 const MainPage = () => {
   const [news, setNews] = useState([]);
@@ -195,7 +194,7 @@ const MainPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100 relative overflow-hidden">
       {/* Floating Background Orbs */}
-      <Navbar/>
+    
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-amber-200/30 to-orange-300/20 rounded-full blur-3xl"></div>
         <div className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-orange-200/20 to-amber-300/30 rounded-full blur-3xl"></div>
@@ -535,7 +534,7 @@ const MainPage = () => {
         </div>
       )}
 
-      <Footer/>
+      
     </div>
   );
 };

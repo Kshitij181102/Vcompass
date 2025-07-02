@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, CheckCircle, X } from 'lucide-react';
-import Footer from "../ui/Footer";
-import Navbar from '../ui/NavBar';
+
 import apis from "../../utils/apis";
 import toast from "react-hot-toast";
 
@@ -123,7 +122,7 @@ const MentorConnect = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100 font-inter">
-            <Navbar />
+            
             <div className="relative overflow-hidden">
                 {/* Floating Orbs */}
                 <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-amber-200/30 to-orange-300/20 rounded-full blur-xl"></div>
@@ -232,7 +231,7 @@ const MentorConnect = () => {
                     ))}
                 </div>
             </div>
-            <Footer />
+          
         </div>
     );
 };

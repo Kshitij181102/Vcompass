@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Home, Users, LogOut, Menu, X } from 'lucide-react';
-import logo from "../../Assets/logo.png"
+import { Home, Users, LogOut, Menu, X, User } from 'lucide-react';
+import logo from "../../Assets/logo.png";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleLogout = () => {
         // Note: localStorage not available in artifacts
-        // localStorage.removeItem('accessToken');
+        localStorage.removeItem('accessToken');
         window.location.href = '/login';
     };
 
@@ -26,14 +26,13 @@ const Navbar = () => {
                     {/* Logo Section */}
                     <div className="flex items-center space-x-3 group">
                         <div className="relative">
-                           
-                            
-                                <img 
-                                    src={logo} 
-                                    alt="V-Compass Logo" 
-                                    className="w-8 h-8 object-contain"
-                                />
-                            
+                            <a href='/main'>
+                            <img 
+                                src={logo} 
+                                alt="V-Compass Logo" 
+                                className="w-8 h-8 object-contain"
+                            />
+                            </a>
                         </div>
                         <h1 className="text-xl font-bold text-amber-900 tracking-tight">
                             V-Compass
@@ -58,6 +57,15 @@ const Navbar = () => {
                             <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                             <Users className="w-4 h-4 mr-2 relative z-10" />
                             <span className="relative z-10">Connect</span>
+                        </a>
+
+                        <a
+                            href="/profile"
+                            className="group flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-amber-800 hover:text-amber-900 hover:bg-amber-50 transition-all duration-200 relative overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                            <User className="w-4 h-4 mr-2 relative z-10" />
+                            <span className="relative z-10">Profile</span>
                         </a>
 
                         {/* Desktop Logout Button */}
@@ -109,6 +117,15 @@ const Navbar = () => {
                     >
                         <Users className="w-5 h-5 mr-3 text-amber-600" />
                         Connect
+                    </a>
+
+                    <a
+                        href="/profile"
+                        onClick={closeMenu}
+                        className="group flex items-center px-4 py-3 rounded-xl text-base font-semibold text-amber-800 hover:text-amber-900 hover:bg-white/60 transition-all duration-200"
+                    >
+                        <User className="w-5 h-5 mr-3 text-amber-600" />
+                        Profile
                     </a>
                     
                     <div className="pt-2">
