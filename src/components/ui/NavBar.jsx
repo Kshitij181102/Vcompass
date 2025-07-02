@@ -8,6 +8,7 @@ const Navbar = () => {
     const handleLogout = () => {
         // Note: localStorage not available in artifacts
         localStorage.removeItem('accessToken');
+        localStorage.clear();
         window.location.href = '/login';
     };
 

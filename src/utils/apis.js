@@ -14,10 +14,13 @@ const apis = () => {
         getMentors: `${local}user/mentors`,
         getNews: `${local}user/news`,
         getPoster: `${local}user/poster`,
-        
+      
         // Profile routes
         getUserProfile: `${local}user/profile`,
         updateProfile: `${local}user/profile/update`,
+        
+        // Booking management route
+        getUserBookings: `${local}user/bookings`,
     };
     
     return list;
