@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, CheckCircle, X, User, BookOpen, Languages, Award, Eye, Mail, Linkedin, Github, Phone, MapPin, Code, Users, GraduationCap } from 'lucide-react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import apis from '../../utils/apis'
 
 const MentorConnect = () => {
@@ -74,11 +76,15 @@ const MentorConnect = () => {
                 } else {
                     const errorText = await response.text();
                     console.error('API Error response:', errorText);
-                    setBookingError(`Failed to fetch bookings: ${response.status}`);
+                    const errorMessage = `Failed to fetch bookings: ${response.status}`;
+                    setBookingError(errorMessage);
+                    toast.error(errorMessage);
                 }
             } catch (error) {
                 console.error('Error fetching user bookings:', error);
-                setBookingError(`Network error: ${error.message}`);
+                const errorMessage = `Network error: ${error.message}`;
+                setBookingError(errorMessage);
+                toast.error(errorMessage);
             } finally {
                 setBookingLoading(false);
             }
@@ -102,6 +108,7 @@ const MentorConnect = () => {
                 setData(mentors);
             } catch (error) {
                 console.error('Error fetching mentors:', error);
+                toast.error('Failed to load mentors. Please try again.');
             }
         };
 
@@ -120,7 +127,7 @@ const MentorConnect = () => {
 
     const handleBookClick = async (id) => {
         if (!selectedTimeSlot && bookedMentorId !== id) {
-            alert('Please select a time slot before booking.');
+            toast.warning('Please select a time slot before booking.');
             return;
         }
 
@@ -167,13 +174,21 @@ const MentorConnect = () => {
                     const dateStr = scheduledIST.toLocaleDateString();
                     const timeStr = scheduledIST.toLocaleTimeString();
                     
-                    let alertMessage = `Booking successful for ${selectedTimeSlot}!\nScheduled for: ${dateStr} at ${timeStr}`;
+                    let successMessage = `Booking successful for ${selectedTimeSlot}! Scheduled for: ${dateStr} at ${timeStr}`;
                     
                     if (!result.isNewBooking) {
-                        alertMessage += `\n\nYou've joined a group session with ${result.totalMentees} total participants.`;
+                        successMessage += ` - You've joined a group session with ${result.totalMentees} total participants.`;
                     }
                     
-                    alert(alertMessage);
+                    toast.success(successMessage, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                    });
+
                     localStorage.setItem("disId", result?.disId || menteeId);
                     setSelectedTimeSlot('');
                     
@@ -192,13 +207,17 @@ const MentorConnect = () => {
                 }
             } catch (error) {
                 console.error('Booking error:', error);
-                alert('Error: ' + error.message);
+                toast.error(`Booking failed: ${error.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                });
             }
             
         } else if (bookedMentorId === id) {
             // Canceling existing booking
             console.log('Canceling existing booking...');
             
+            // Using a custom toast for confirmation
             const confirmCancel = window.confirm('Are you sure you want to cancel your booking?');
             
             if (!confirmCancel) {
@@ -221,28 +240,43 @@ const MentorConnect = () => {
                 }
 
                 if (result?.status) {
+                     window.location.reload();
                     setBookedMentorId(null);
                     localStorage.removeItem('bookedMentorId');
                     localStorage.removeItem('bookingTime');
                     
-                    let alertMessage = 'Booking cancelled successfully!';
+                    let successMessage = 'Booking cancelled successfully!';
                     
                     if (result.remainingMentees > 0) {
-                        alertMessage += `\n\n${result.remainingMentees} other participants remain in this session.`;
+                        successMessage += ` ${result.remainingMentees} other participants remain in this session.`;
                     }
                     
-                    alert(alertMessage);
+                    toast.success(successMessage, {
+                        position: "top-right",
+                        autoClose: 4000,
+                    });
+
                     setSelectedTimeSlot('');
                     setUserBookings([]);
+                   
                     
                     console.log('Cancellation successful, updated state');
+                 
                 }
             } catch (error) {
+              
                 console.error('Cancellation error:', error);
-                alert('Error: ' + error.message);
+                toast.error(`Cancellation failed: ${error.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                });
+                   window.location.reload();
             }
         } else {
-            alert("You have already booked another mentor. Please cancel your current booking first.");
+            toast.warning("You have already booked another mentor. Please cancel your current booking first.", {
+                position: "top-right",
+                autoClose: 4000,
+            });
         }
         
         setLoading(false);
@@ -279,6 +313,20 @@ const MentorConnect = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100 font-inter">
+            {/* Toast Container */}
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+
             {/* Header Section */}
             <div className="relative overflow-hidden">
                 <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-amber-200/30 to-orange-300/20 rounded-full blur-xl"></div>
@@ -310,10 +358,6 @@ const MentorConnect = () => {
                                 <span>Flexible Scheduling</span>
                             </div>
                         </div>
-                        
-                        
-                        
-                        
                     </div>
                 </div>
             </div>
@@ -471,7 +515,7 @@ const MentorConnect = () => {
                 )}
             </div>
 
-            {/* Modal - Same as before */}
+            {/* Modal - Same as before but with toastify for button clicks */}
             {showModal && selectedMentor && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
                     <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
