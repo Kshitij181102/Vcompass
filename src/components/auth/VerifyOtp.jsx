@@ -170,7 +170,7 @@ const VerifyOtp = () => {
         </div>
 
         <div className="mt-6">
-          <Button>
+          <Button type="submit">
             <LoadingButton loading={loading} title="Verify" />
           </Button>
         </div>

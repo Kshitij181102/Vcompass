@@ -1,5 +1,6 @@
 const apis = () => {
-    const local = 'http://localhost:5555/';
+    const local ='http://localhost:5555/'
+    //'http://localhost:5555/';
     //https://vcompass-backend-wahj.vercel.app/
     const list = {
         registerUser: `${local}user/register`,

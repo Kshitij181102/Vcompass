@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V-Compass • Campus Chatbot</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app__header">
+        <div class="logo">
+          <img src="/favicon.svg" alt="V-Compass" />
+          <div class="logo__text">
+            <h1>V-Compass</h1>
+            <p>Campus chatbot</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="chat">
+        <div id="messages" class="chat__messages"></div>
+        <form id="chat-form" class="chat__form">
+          <input id="question" type="text" placeholder="Ask about professors, offices, placement contacts..." autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+      </main>
+
+      <footer class="app__footer">Made for campus queries with care.</footer>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+  </html>
+
+
+

@@ -1,40 +1,50 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { initChatbotHealthCheck } from './ChatbotHealth';
 
 const Chatbot = () => {
-    // Load Dialogflow Messenger script once
     useEffect(() => {
+        // Load the V-Compass chatbot widget
+        if (window.__vcompass_widget_loaded) return;
+        
+        // Set the chatbot server origin
+        window.VCOMPASS_ORIGIN = process.env.REACT_APP_CHATBOT_URL || 'http://localhost:3001';
+        window.VCOMPASS_ICON_URL = 'logo.png'// Use your app's logo
+        
+        // Initialize health check
+        initChatbotHealthCheck();
+        
+        // Create and load the widget script
         const script = document.createElement('script');
-        script.src = 'https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1';
+        script.src = `${window.VCOMPASS_ORIGIN}/widget.js`;
         script.async = true;
+        script.onload = () => {
+            console.log('✅ V-Compass chatbot widget loaded successfully');
+        };
+        script.onerror = () => {
+            console.error('❌ Failed to load V-Compass chatbot widget. Make sure the chatbot server is running on', window.VCOMPASS_ORIGIN);
+        };
+        
         document.body.appendChild(script);
 
         return () => {
-            document.body.removeChild(script);
+            // Cleanup: remove widget elements if they exist
+            const widget = document.querySelector('[aria-label="Open V-Compass chatbot"]');
+            const frame = document.querySelector('iframe[title="V-Compass Chat"]');
+            if (widget) widget.remove();
+            if (frame && frame.parentElement) frame.parentElement.remove();
+            
+            // Remove script
+            if (document.body.contains(script)) {
+                document.body.removeChild(script);
+            }
+            
+            // Reset the loaded flag
+            window.__vcompass_widget_loaded = false;
         };
     }, []);
 
-    return (
-        <div>
-            {/* Dialogflow Messenger always visible */}
-            <df-messenger
-                intent="WELCOME"
-                chat-title="V-Guide"
-                agent-id="84b3c3f1-9005-4363-85d0-662e09cb9e84"
-                language-code="en"
-                style={{
-                    position: 'fixed',
-                    bottom: '20px', // Adjusted for visible positioning
-                    right: '20px', // Right positioning
-                    width: '0px', // Adjusted width to be more appropriate
-                    height: '0px', // Adjusted height to make it a standard size
-                    zIndex: '1000',
-                    borderRadius: '10px',
-                    overflow: 'hidden',
-                    boxShadow: '0px 0px 10px rgba(0,0,0,0.2)',
-                }}
-            ></df-messenger>
-        </div>
-    );
+    // Return null since the widget injects itself into the DOM
+    return null;
 };
 
 export default Chatbot;
