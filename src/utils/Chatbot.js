@@ -7,7 +7,7 @@ const Chatbot = () => {
         if (window.__vcompass_widget_loaded) return;
         
         // Set the chatbot server origin
-        window.VCOMPASS_ORIGIN = process.env.REACT_APP_CHATBOT_URL || 'http://localhost:3001';
+        window.VCOMPASS_ORIGIN = 'http://localhost:3001';
         window.VCOMPASS_ICON_URL = 'logo.png'// Use your app's logo
         
         // Initialize health check

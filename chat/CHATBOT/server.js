@@ -6,8 +6,8 @@ const path = require('path');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express();
-const PORT = process.env.PORT || 3001;
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
+const PORT =  3001;
+const GEMINI_API_KEY = 'AIzaSyD9HcVN-ujc6RPk6cglweXo0HryLSZ8pBQ';
 
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
@@ -487,7 +487,7 @@ app.post('/api/reload', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`V-Compass running at http://localhost:${PORT}`);
+  console.log(`V-Compass running at http://localhost:3001`);
 });
 
 
