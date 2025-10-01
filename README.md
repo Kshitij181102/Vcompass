@@ -1,49 +1,65 @@
-# Getting Started with Create React App
+# V-Compass - Campus Navigation & Information System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React-based campus information system with integrated AI chatbot.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Campus Information System** - Complete navigation and information portal
+- **AI Chatbot Integration** - Powered by deployed chatbot at https://vcompass-chatbot.vercel.app
+- **Responsive Design** - Works on all devices
+- **Modern UI** - Clean, professional interface
 
-### `npm start`
+## 🛠️ Quick Start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Development
+```bash
+npm install
+npm start
+```
+Open [http://localhost:3000](http://localhost:3000)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Production Build
+```bash
+npm run build
+```
 
-### `npm test`
+## 🤖 Chatbot Integration
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app integrates with a standalone chatbot deployed at:
+**https://vcompass-chatbot.vercel.app**
 
-### `npm run build`
+The chatbot provides:
+- Campus information queries
+- Professor and office details
+- Department information
+- AI-powered responses
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🌐 Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Deploy to Vercel or any static hosting service:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Build the project: `npm run build`
+2. Deploy the `build` folder
+3. Set environment variable: `REACT_APP_CHATBOT_URL=https://vcompass-chatbot.vercel.app`
 
-### `npm run eject`
+## 📁 Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+src/
+├── components/
+│   ├── ChatbotWidget.jsx    # Integrated chatbot widget
+│   └── Layout.jsx           # Main layout component
+├── pages/                   # Application pages
+└── styles/                  # CSS and styling
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🔧 Environment Variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- `REACT_APP_CHATBOT_URL` - URL of the deployed chatbot service
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📱 Chatbot Widget
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The floating chatbot button appears in the bottom-right corner of all pages. Click to interact with the V-Compass AI assistant.
 
 ### Code Splitting
 
