@@ -3,10 +3,10 @@ import App from './App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import Chatbot from './utils/Chatbot';
+import ChatbotWidget from './utils/ChatbotWidget';
 reactDOM.createRoot(document.getElementById('root')).render(
 <BrowserRouter>
-<Chatbot/>
+<ChatbotWidget/>
 <Toaster position='top-center'/>
     <App />
 </BrowserRouter>

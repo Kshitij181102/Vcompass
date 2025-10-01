@@ -1,0 +1,13 @@
+{
+    "functions": {
+        "api/chatbot.js": {
+            "runtime": "nodejs18.x"
+        }
+    },
+    "rewrites": [
+        {
+            "source": "/api/chatbot/(.*)",
+            "destination": "/api/chatbot"
+        }
+    ]
+}

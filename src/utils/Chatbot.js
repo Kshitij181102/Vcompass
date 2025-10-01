@@ -6,8 +6,11 @@ const Chatbot = () => {
         // Load the V-Compass chatbot widget
         if (window.__vcompass_widget_loaded) return;
         
-        // Set the chatbot server origin
-        window.VCOMPASS_ORIGIN = 'http://localhost:3001';
+        // Set the chatbot server origin - auto-detect environment
+        // In production (Vercel), use the same domain for API routes
+        // In development, use localhost:3001
+        const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+        window.VCOMPASS_ORIGIN = isProduction ? window.location.origin : 'http://localhost:3001';
         window.VCOMPASS_ICON_URL = 'logo.png'// Use your app's logo
         
         // Initialize health check
