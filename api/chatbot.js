@@ -125,9 +125,8 @@ export default function handler(req, res) {
     return res.status(200).end();
   }
 
-  const { url } = req;
-  
-  if (req.method === 'GET' && (url === '/api/health' || url.includes('/api/chatbot') && req.method === 'GET')) {
+  // Handle health check
+  if (req.method === 'GET') {
     return res.status(200).json({ 
       status: 'ok', 
       message: 'V-Compass Chatbot API is running',
@@ -135,6 +134,7 @@ export default function handler(req, res) {
     });
   }
 
+  // Handle chat queries
   if (req.method === 'POST') {
     const { query } = req.body;
     
