@@ -5,17 +5,21 @@ const Chatbot = () => {
     useEffect(() => {
         // Load the V-Compass chatbot widget
         if (window.__vcompass_widget_loaded) return;
-        
-        // Set the chatbot server origin - auto-detect environment
-        // In production (Vercel), use the same domain for API routes
-        // In development, use localhost:3001
+
+        // Set the chatbot server origin
+        // For production, use a deployed chatbot server URL
+        // For development, use localhost:3001
         const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-        window.VCOMPASS_ORIGIN = isProduction ? window.location.origin : 'http://localhost:3001';
+
+        // You need to deploy your chatbot server separately and update this URL
+        window.VCOMPASS_ORIGIN = isProduction
+            ? 'https://your-chatbot-server.onrender.com' // Replace with your deployed chatbot URL
+            : 'http://localhost:3001';
         window.VCOMPASS_ICON_URL = 'logo.png'// Use your app's logo
-        
+
         // Initialize health check
         initChatbotHealthCheck();
-        
+
         // Create and load the widget script
         const script = document.createElement('script');
         script.src = `${window.VCOMPASS_ORIGIN}/widget.js`;
@@ -26,7 +30,7 @@ const Chatbot = () => {
         script.onerror = () => {
             console.error('❌ Failed to load V-Compass chatbot widget. Make sure the chatbot server is running on', window.VCOMPASS_ORIGIN);
         };
-        
+
         document.body.appendChild(script);
 
         return () => {
@@ -35,12 +39,12 @@ const Chatbot = () => {
             const frame = document.querySelector('iframe[title="V-Compass Chat"]');
             if (widget) widget.remove();
             if (frame && frame.parentElement) frame.parentElement.remove();
-            
+
             // Remove script
             if (document.body.contains(script)) {
                 document.body.removeChild(script);
             }
-            
+
             // Reset the loaded flag
             window.__vcompass_widget_loaded = false;
         };

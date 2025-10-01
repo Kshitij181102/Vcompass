@@ -1,7 +1,9 @@
 // Utility to check chatbot server health
 export const checkChatbotHealth = async () => {
   const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-  const chatbotUrl = isProduction ? window.location.origin : 'http://localhost:3001';
+  const chatbotUrl = isProduction 
+    ? 'https://your-chatbot-server.onrender.com' // Replace with your deployed chatbot URL
+    : 'http://localhost:3001';
   
   try {
     const response = await fetch(`${chatbotUrl}/api/health`);
