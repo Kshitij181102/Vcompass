@@ -29,9 +29,45 @@ const Chatbot = () => {
         };
         script.onerror = () => {
             console.error('❌ Failed to load V-Compass chatbot widget. Make sure the chatbot server is running on', window.VCOMPASS_ORIGIN);
+            // Create a fallback widget when the server is not available
+            createFallbackWidget();
         };
 
         document.body.appendChild(script);
+
+        // Function to create a fallback widget
+        function createFallbackWidget() {
+            // Create chatbot button
+            const button = document.createElement('button');
+            button.innerHTML = '💬';
+            button.setAttribute('aria-label', 'Open V-Compass chatbot');
+            button.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 999999;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+
+            button.addEventListener('click', () => {
+                alert('Chatbot server is currently unavailable. Please try again later or contact support.');
+            });
+
+            document.body.appendChild(button);
+            console.log('📱 Fallback chatbot widget created - server unavailable');
+        }
 
         return () => {
             // Cleanup: remove widget elements if they exist
