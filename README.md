@@ -20,6 +20,22 @@ V-Compass is an online mentorship and campus information platform designed to he
 - Manage your bookings (book/cancel sessions)
 - Group session support with multiple participants
 
+### 🤖 Mentor–Mentee Automation System
+An automated scheduling and communication system that connects to MongoDB and creates temporary Discord channels at the exact scheduled time.
+
+**Key Capabilities:**
+- Continuously monitors MongoDB for upcoming bookings
+- Creates temporary Discord chat rooms at session time
+- Handles multiple mentees per mentor with dynamic permissions
+- Automatically deletes session rooms after one hour
+- Efficient background scheduler with async event handling
+
+**Technical Challenges Solved:**
+- Managing overlapping sessions and preventing race conditions
+- Ensuring the scheduler reliably triggers without missing events
+- Synchronizing dynamic channel permissions for mentor-mentee groups
+- Optimized database queries for stable, real-time monitoring
+
 ### 📰 Campus Updates
 - Latest university news and announcements
 - Upcoming events and posters
