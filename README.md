@@ -1,86 +1,156 @@
-# V-Compass - Campus Navigation & Information System
+# V-Compass 🧭
 
-A modern React-based campus information system with integrated AI chatbot.
+A modern web application for university students to connect with mentors, stay updated with campus news and events, and get instant answers through an AI-powered chatbot.
 
-## 🚀 Features
+## 🎯 What is V-Compass?
 
-- **Campus Information System** - Complete navigation and information portal
-- **AI Chatbot Integration** - Powered by deployed chatbot at https://vcompass-chatbot.vercel.app
-- **Responsive Design** - Works on all devices
-- **Modern UI** - Clean, professional interface
+V-Compass is an online mentorship and campus information platform designed to help university students:
 
-## 🛠️ Quick Start
+- **Connect with Mentors** - Book 1-on-1 or group sessions with experienced student mentors
+- **Stay Informed** - Access the latest campus news, events, and announcements
+- **Get Quick Answers** - Use the AI chatbot for instant university-related FAQs
+- **Manage Your Profile** - Track your academic information and bookings
 
-### Development
+## ✨ Features
+
+### 🎓 Mentor Connect
+- Browse available mentors with their specializations and availability
+- Book mentorship sessions with flexible time slots
+- View mentor profiles with detailed information (program, department, expertise)
+- Manage your bookings (book/cancel sessions)
+- Group session support with multiple participants
+
+### 📰 Campus Updates
+- Latest university news and announcements
+- Upcoming events and posters
+- Filter by categories: Academic, Cultural, Sports, Placement, Workshop
+- Detailed view with registration links for events
+
+### 🤖 AI Chatbot
+- Floating chatbot widget available throughout the app
+- Instant answers to university FAQs
+- Powered by V-Compass Assistant
+
+### 👤 User Profile
+- Personal information management
+- Academic details (Student ID, Program, Department, Year)
+- Discord integration for mentor communication
+- Secure password management
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd client
+```
+
+2. Install dependencies:
 ```bash
 npm install
+```
+
+3. Create a `.env.local` file in the root directory:
+```env
+REACT_APP_CHATBOT_URL=https://vcompass-chatbot.vercel.app
+```
+
+4. Start the development server:
+```bash
 npm start
 ```
-Open [http://localhost:3000](http://localhost:3000)
 
-### Production Build
+The app will open at `http://localhost:3000`
+
+### Build for Production
+
 ```bash
 npm run build
 ```
-
-## 🤖 Chatbot Integration
-
-The app integrates with a standalone chatbot deployed at:
-**https://vcompass-chatbot.vercel.app**
-
-The chatbot provides:
-- Campus information queries
-- Professor and office details
-- Department information
-- AI-powered responses
-
-## 🌐 Deployment
-
-Deploy to Vercel or any static hosting service:
-
-1. Build the project: `npm run build`
-2. Deploy the `build` folder
-3. Set environment variable: `REACT_APP_CHATBOT_URL=https://vcompass-chatbot.vercel.app`
 
 ## 📁 Project Structure
 
 ```
 src/
 ├── components/
-│   ├── ChatbotWidget.jsx    # Integrated chatbot widget
-│   └── Layout.jsx           # Main layout component
-├── pages/                   # Application pages
-└── styles/                  # CSS and styling
+│   ├── auth/           # Authentication & main pages
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── Main.jsx          # Landing page
+│   │   ├── MainPage.jsx      # Campus updates dashboard
+│   │   ├── MentorConnect.jsx # Mentor booking system
+│   │   ├── Profile.jsx       # User profile management
+│   │   └── ...
+│   ├── ui/             # Reusable UI components
+│   ├── ChatbotWidget.jsx
+│   ├── Layout.jsx
+│   └── ProtectedRoute.jsx
+├── utils/
+│   └── apis.js         # API endpoint configurations
+├── Assets/             # Images and static assets
+├── App.jsx             # Main routing configuration
+└── index.jsx           # Application entry point
 ```
 
-## 🔧 Environment Variables
+## 🔐 Authentication Flow
 
-- `REACT_APP_CHATBOT_URL` - URL of the deployed chatbot service
+1. **Register** - Create account with name, email, password, and Discord ID
+2. **Login** - Access your account with email and password
+3. **Forgot Password** - Reset via OTP verification
+4. **Protected Routes** - Main features require authentication
 
-## 📱 Chatbot Widget
+## 🛠️ Tech Stack
 
-The floating chatbot button appears in the bottom-right corner of all pages. Click to interact with the V-Compass AI assistant.
+- **Frontend**: React 18, React Router v6
+- **Styling**: Tailwind CSS, styled-components, Bootstrap
+- **UI Components**: Lucide React, React Icons, React Feather
+- **Notifications**: React Hot Toast, React Toastify
+- **Carousel**: React Slick, Swiper
 
-### Code Splitting
+## 📱 Pages Overview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Route | Description | Auth Required |
+|-------|-------------|---------------|
+| `/` | Landing page with app introduction | No |
+| `/login` | User login | No |
+| `/register` | New user registration | No |
+| `/forget/password` | Password recovery | No |
+| `/main` | Campus news & events dashboard | Yes |
+| `/mentor/connect` | Browse and book mentors | Yes |
+| `/profile` | User profile settings | Yes |
 
-### Analyzing the Bundle Size
+## 🔗 API Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The app connects to a backend API hosted at:
+```
+https://vcompass-backend-wahj.vercel.app/
+```
 
-### Making a Progressive Web App
+Key endpoints:
+- User authentication (register, login, password reset)
+- Mentor listing and booking management
+- News and events fetching
+- Profile management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🎨 Design
 
-### Advanced Configuration
+- Modern gradient-based UI with amber/orange color scheme
+- Dark mode support
+- Responsive design for mobile and desktop
+- Glassmorphism effects with backdrop blur
+- Smooth animations and transitions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📄 License
 
-### Deployment
+This project is private and proprietary.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Built with ❤️ for university students
