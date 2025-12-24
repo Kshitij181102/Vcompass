@@ -157,11 +157,11 @@ Key endpoints:
 
 ## 🎨 Design
 
-- Modern gradient-based UI with amber/orange color scheme
-- Dark mode support
+- Modern gradient-based UI with warm amber/orange color scheme
 - Responsive design for mobile and desktop
 - Glassmorphism effects with backdrop blur
 - Smooth animations and transitions
+- Clean and intuitive user interface
 
 ## 📄 License
 
