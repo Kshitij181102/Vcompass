@@ -98,17 +98,38 @@ const MainPage = () => {
   };
 
   useEffect(() => {
+    const fetchNews = async (page = 1, category = '') => {
+      try {
+        const queryParams = new URLSearchParams({ page: page.toString(), limit: '6' });
+        if (category && category !== 'all') queryParams.append('category', category);
+        const response = await fetch(`${apiList.getNews}?${queryParams}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        if (data.success) {
+          setNews(page === 1 ? (data.data || []) : prev => [...prev, ...(data.data || [])]);
+        } else throw new Error(data.message || 'Failed to fetch news');
+      } catch (err) { setError(`Failed to fetch news: ${err.message}`); }
+    };
+
+    const fetchPosters = async (page = 1, category = '') => {
+      try {
+        const queryParams = new URLSearchParams({ page: page.toString(), limit: '6' });
+        if (category && category !== 'all') queryParams.append('category', category);
+        const response = await fetch(`${apiList.getPoster}?${queryParams}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        if (data.success) {
+          setPosters(page === 1 ? (data.data || []) : prev => [...prev, ...(data.data || [])]);
+        } else throw new Error(data.message || 'Failed to fetch posters');
+      } catch (err) { setError(`Failed to fetch events: ${err.message}`); }
+    };
+
     const loadData = async () => {
       setLoading(true);
       setError(null);
-      
       try {
-        await Promise.all([
-          fetchNews(1),
-          fetchPosters(1)
-        ]);
+        await Promise.all([fetchNews(1), fetchPosters(1)]);
       } catch (err) {
-        console.error('Error loading data:', err);
         setError('Failed to load data');
       } finally {
         setLoading(false);
@@ -116,7 +137,7 @@ const MainPage = () => {
     };
 
     loadData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleTabChange = (tab) => {
     console.log('Changing tab to:', tab);

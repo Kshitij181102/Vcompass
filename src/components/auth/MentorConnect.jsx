@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, CheckCircle, X, User, BookOpen, Languages, Award, Eye, Mail, Linkedin, Github, Phone, MapPin, Code, Users, GraduationCap } from 'lucide-react';
+import { Calendar, Clock, CheckCircle, X, BookOpen, Languages, Award, Eye, Mail, Linkedin, Github, Code, Users, GraduationCap } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import apis from '../../utils/apis'
@@ -44,7 +44,6 @@ const MentorConnect = () => {
                         setBookedMentorId(null);
                     }
                 } else {
-                    const errorText = await response.text();
                     const errorMessage = `Failed to fetch bookings: ${response.status}`;
                     setBookingError(errorMessage);
                     toast.error(errorMessage);

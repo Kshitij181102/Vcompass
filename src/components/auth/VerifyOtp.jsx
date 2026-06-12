@@ -17,7 +17,7 @@ const VerifyOtp = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const navigate = useNavigate();
 
-  useEffect(() => { refs[0].current?.focus(); }, []);
+  useEffect(() => { refs[0].current?.focus(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const inputChange = (e, idx) => {
     let val = e.target.value.replace(/\D/, "").slice(-1);
