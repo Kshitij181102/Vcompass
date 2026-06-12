@@ -1,30 +1,105 @@
-.ui_button {
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap');
+
+.vc-btn {
+  position: relative;
   width: 100%;
-  padding: 0.8rem;
-  outline: none;
+  padding: 0.9rem 1.5rem;
   border: none;
-  border-radius: 0.75rem; /* rounded-xl */
-  background: linear-gradient(to right, #f59e0b, #f97316); /* amber-500 to orange-500 */
+  border-radius: 14px;
   cursor: pointer;
-  color: #ffffff; /* white text */
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
-  box-shadow: 0 10px 15px -3px rgba(251, 191, 36, 0.2); /* amber glow */
-  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  letter-spacing: 0.15px;
+  outline: none;
+  overflow: hidden;
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 200ms ease,
+              opacity 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vc-btn__inner {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  transition: gap 200ms ease;
 }
 
-/* Hover effect */
-.ui_button:hover {
-  background: linear-gradient(to right, #d97706, #ea580c); /* darker amber-600 to orange-600 */
-  transform: scale(1.02);
-  box-shadow: 0 12px 18px -4px rgba(251, 146, 60, 0.3);
+.vc-btn__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 500ms ease;
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* Active effect */
-.ui_button:active {
-  background: linear-gradient(to right, #d97706, #ea580c);
-  transform: scale(0.98);
+.vc-btn:hover .vc-btn__shine {
+  transform: translateX(100%);
+}
+
+/* Primary */
+.vc-btn--primary {
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.25),
+              0 1px 2px rgba(0,0,0,0.06),
+              inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.vc-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(249, 115, 22, 0.38),
+              0 2px 6px rgba(0,0,0,0.08),
+              inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.vc-btn--primary:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
+}
+
+.vc-btn--primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Ghost */
+.vc-btn--ghost {
+  background: rgba(245, 158, 11, 0.08);
+  color: #92400e;
+  border: 1.5px solid rgba(245, 158, 11, 0.28);
+  box-shadow: none;
+}
+
+.vc-btn--ghost:hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Danger */
+.vc-btn--danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+}
+
+.vc-btn--danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.38);
 }

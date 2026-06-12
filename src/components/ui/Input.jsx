@@ -1,7 +1,7 @@
 import React from "react";
 import "./input.css";
 
-const Input = ({ placeholder, required, onChange, value, type }) => {
+const Input = ({ placeholder, required, onChange, value, type, name, autoComplete }) => {
   return (
     <input
       type={type}
@@ -9,7 +9,9 @@ const Input = ({ placeholder, required, onChange, value, type }) => {
       value={value}
       placeholder={placeholder}
       required={required}
-      className="ui_input"
+      name={name}
+      autoComplete={autoComplete}
+      className="vc-input"
     />
   );
 };

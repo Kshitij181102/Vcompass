@@ -1,28 +1,33 @@
-.back_toLogin_ui {
-  background-color: rgba(255, 255, 255, 0.1); /* semi-transparent warm tone */
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  display: flex;
+.vc-back-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 14px;
+  gap: 0.45rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: 100px;
+  background: rgba(245, 158, 11, 0.07);
+  border: 1.5px solid rgba(245, 158, 11, 0.2);
+  font-size: 0.84rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  color: #92400e;
   cursor: pointer;
-  transition: all 0.3s ease;
-  color: #713f12; /* deep amber text */
-  font-weight: 500;
-  font-family: 'Inter', sans-serif;
-  backdrop-filter: blur(4px);
-  border: 1.5px solid #f1c27d; /* soft amber border */
+  transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  width: fit-content;
 }
 
-.back_toLogin_ui:hover {
-  background-color: #facc15; /* hover amber-400 */
-  color: #fff; /* white text on hover */
+.vc-back-btn:hover {
+  background: rgba(245, 158, 11, 0.13);
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #78350f;
+  transform: translateX(-3px);
 }
 
-.back_toLogin_ui svg {
-  font-size: 1.2rem;
-  color: inherit;
-  transition: color 0.3s ease;
+.vc-back-btn svg {
+  flex-shrink: 0;
+  transition: transform 220ms ease;
+}
+
+.vc-back-btn:hover svg {
+  transform: translateX(-2px);
 }

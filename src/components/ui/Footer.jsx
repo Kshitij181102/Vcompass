@@ -1,128 +1,103 @@
 import React from "react";
-import { Facebook, Twitter, Instagram, Heart } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Heart, Compass } from 'lucide-react';
 import logo from '../../Assets/logo.png';
+import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100 border-t border-amber-200/30">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-br from-amber-200/20 to-orange-300/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br from-orange-200/20 to-amber-300/10 rounded-full blur-2xl"></div>
+    <footer className="vc-footer">
+      {/* Decorative mesh */}
+      <div className="vc-footer__mesh" aria-hidden="true">
+        <div className="vc-footer__orb vc-footer__orb--1" />
+        <div className="vc-footer__orb vc-footer__orb--2" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main footer content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          
-          {/* Logo and Brand Section */}
-          <div className="flex flex-col items-center md:items-start space-y-4">
-            <div className="flex items-center space-x-3 group">
-              <div className="relative">
-                
-                
-                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
-                    <img 
-                      src={logo} 
-                      alt="V-Compass Logo" 
-                      className="w-10 h-10 object-contain"
-                    />
-                  </div>
-                
+      <div className="vc-footer__wrap">
+        {/* Main Grid */}
+        <div className="vc-footer__grid">
+          {/* Brand */}
+          <div className="vc-footer__brand-col">
+            <a href="/main" className="vc-footer__brand">
+              <div className="vc-footer__logo-ring">
+                <img src={logo} alt="V-Compass" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-amber-900 tracking-tight">V-Compass</h2>
-                <p className="text-sm text-amber-700/80">Guiding Your Journey</p>
+                <p className="vc-footer__brand-name">V-Compass</p>
+                <p className="vc-footer__brand-tagline">Guiding Your Journey</p>
               </div>
-            </div>
-            
-            <p className="text-amber-700/90 text-sm max-w-xs text-center md:text-left leading-relaxed">
-              Connecting you with the guidance and mentorship you need to navigate your career and personal growth.
+            </a>
+            <p className="vc-footer__brand-desc">
+              Connecting ambitious learners with world-class mentors to navigate career growth and personal development.
             </p>
+
+            {/* Social */}
+            <div className="vc-footer__socials">
+              {[
+                { href: 'https://facebook.com',  Icon: Facebook,  label: 'Facebook'  },
+                { href: 'https://twitter.com',   Icon: Twitter,   label: 'Twitter'   },
+                { href: 'https://instagram.com', Icon: Instagram, label: 'Instagram' },
+              ].map(({ href, Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="vc-footer__social-btn"
+                  aria-label={label}
+                >
+                  <Icon size={17} strokeWidth={1.8} />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-col items-center md:items-start space-y-4">
-            <h3 className="text-lg font-semibold text-amber-900">Quick Links</h3>
-            <div className="flex flex-col space-y-2">
-              <a href="/main" className="text-amber-700 hover:text-amber-800 transition-colors duration-200 text-sm font-medium hover:translate-x-1 transform transition-transform">
-                Home
-              </a>
-              <a href="/mentor/connect" className="text-amber-700 hover:text-amber-800 transition-colors duration-200 text-sm font-medium hover:translate-x-1 transform transition-transform">
-                Connect with Mentors
-              </a>
-              <a href="/about" className="text-amber-700 hover:text-amber-800 transition-colors duration-200 text-sm font-medium hover:translate-x-1 transform transition-transform">
-                About Us
-              </a>
-              <a href="/contact" className="text-amber-700 hover:text-amber-800 transition-colors duration-200 text-sm font-medium hover:translate-x-1 transform transition-transform">
-                Contact
-              </a>
-            </div>
+          <div className="vc-footer__col">
+            <h3 className="vc-footer__col-title">Quick Links</h3>
+            <nav className="vc-footer__links">
+              {[
+                { href: '/main',           label: 'Home'              },
+                { href: '/mentor/connect', label: 'Connect with Mentors' },
+                { href: '/about',          label: 'About Us'          },
+                { href: '/contact',        label: 'Contact'           },
+              ].map(({ href, label }) => (
+                <a key={href} href={href} className="vc-footer__link">
+                  <span className="vc-footer__link-dot" />
+                  {label}
+                </a>
+              ))}
+            </nav>
           </div>
 
-          {/* Social Media and Contact */}
-          <div className="flex flex-col items-center md:items-start space-y-4">
-            <h3 className="text-lg font-semibold text-amber-900">Connect With Us</h3>
-            
-            <div className="flex space-x-4">
-              <a 
-                href="https://facebook.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group p-3 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-amber-200/50 hover:border-amber-300/70 hover:scale-110"
-              >
-                <Facebook className="w-5 h-5 text-amber-600 group-hover:text-amber-700 transition-colors" />
-              </a>
-              
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group p-3 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-amber-200/50 hover:border-amber-300/70 hover:scale-110"
-              >
-                <Twitter className="w-5 h-5 text-amber-600 group-hover:text-amber-700 transition-colors" />
-              </a>
-              
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group p-3 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-amber-200/50 hover:border-amber-300/70 hover:scale-110"
-              >
-                <Instagram className="w-5 h-5 text-amber-600 group-hover:text-amber-700 transition-colors" />
-              </a>
-            </div>
+          {/* Contact */}
+          <div className="vc-footer__col">
+            <h3 className="vc-footer__col-title">Get in Touch</h3>
+            <p className="vc-footer__contact-label">Email us at</p>
+            <a href="mailto:info@v-compass.com" className="vc-footer__email">
+              info@v-compass.com
+            </a>
 
-            <div className="text-center md:text-left">
-              <p className="text-amber-700/80 text-sm">Email us at:</p>
-              <a href="mailto:info@v-compass.com" className="text-amber-600 hover:text-amber-700 font-medium text-sm transition-colors">
-                info@v-compass.com
-              </a>
+            <div className="vc-footer__badge">
+              <Compass size={14} strokeWidth={2} />
+              <span>Trusted by 18,000+ learners</span>
             </div>
           </div>
         </div>
 
-        {/* Bottom section */}
-        <div className="border-t border-amber-200/40 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-2 text-amber-700/80 text-sm">
-              <span>© 2024 V-Compass. Made with</span>
-              <Heart className="w-4 h-4 text-red-500 fill-current" />
-              <span>for your growth</span>
-            </div>
-            
-            <div className="flex space-x-6 text-sm">
-              <a href="/privacy" className="text-amber-700/80 hover:text-amber-800 transition-colors">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="text-amber-700/80 hover:text-amber-800 transition-colors">
-                Terms of Service
-              </a>
-            </div>
+        {/* Bottom bar */}
+        <div className="vc-footer__bottom">
+          <p className="vc-footer__copy">
+            © {new Date().getFullYear()} V-Compass. Made with{' '}
+            <Heart size={13} className="vc-footer__heart" aria-hidden="true" />
+            {' '}for your growth.
+          </p>
+          <div className="vc-footer__legal">
+            <a href="/privacy" className="vc-footer__legal-link">Privacy Policy</a>
+            <span className="vc-footer__legal-sep" />
+            <a href="/terms"   className="vc-footer__legal-link">Terms of Service</a>
           </div>
         </div>
       </div>
-
     </footer>
   );
 };

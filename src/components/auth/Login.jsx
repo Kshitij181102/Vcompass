@@ -6,7 +6,8 @@ import apis from "../../utils/apis";
 import toast from "react-hot-toast";
 import LoadingButton from "../ui/LoadingButton";
 import logo from "../../Assets/logo.png";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
+import "./Login.css";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,9 +15,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const emailChange = (e) => setEmail(e.target.value);
-  const passwordChange = (e) => setPassword(e.target.value);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -26,21 +24,18 @@ const Login = () => {
         method: "POST",
         body: JSON.stringify({ email, password }),
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
       });
-
       const result = await response.json();
       setLoading(false);
-
-      if (!response.ok) {
-        toast.error(result?.message || "Login failed");
-        return;
-      }
-
-      if (result?.status && result?.token) {
+      if (!response.ok) { toast.error(result?.message || "Login failed"); return; }
+      if (result?.status) {
         toast.success(result.message || "Login successful");
-        localStorage.setItem("accessToken", result.token);
-        localStorage.setItem("disId", result.disId);
-        navigate("/main");
+        sessionStorage.setItem("disId", result.disId);
+        // Redirect based on role
+        if (result.role === 'admin')  navigate('/admin');
+        else if (result.role === 'mentor') navigate('/mentor');
+        else navigate('/main');
       }
     } catch (err) {
       toast.error(err.message || "Something went wrong");
@@ -49,92 +44,127 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-100 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-amber-200/30 to-orange-300/20 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-yellow-200/30 to-amber-300/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-200/10 to-amber-200/10 rounded-full blur-3xl"></div>
+    <div className="vc-login">
+      {/* ── Left ── */}
+      <div className="vc-login__left">
+        <div className="vc-login__left-content">
+          <div className="vc-login__brand">
+            <div className="vc-login__logo-box">
+              <img src={logo} alt="V-Compass" className="vc-login__logo-img" />
+            </div>
+            <span className="vc-login__brand-name">V-Compass</span>
+          </div>
+
+          <h1 className="vc-login__headline">
+            Navigate<br />Your <em>Future.</em>
+          </h1>
+          <p className="vc-login__subheadline">
+            Connect with world-class mentors who guide you toward the career and life you envision.
+          </p>
+
+          <div className="vc-login__stats">
+            <div>
+              <span className="vc-login__stat-num">2.4k+</span>
+              <span className="vc-login__stat-label">Mentors</span>
+            </div>
+            <div className="vc-login__stat-sep" />
+            <div>
+              <span className="vc-login__stat-num">18k+</span>
+              <span className="vc-login__stat-label">Sessions</span>
+            </div>
+            <div className="vc-login__stat-sep" />
+            <div>
+              <span className="vc-login__stat-num">96%</span>
+              <span className="vc-login__stat-label">Satisfaction</span>
+            </div>
+          </div>
+
+          <div className="vc-login__testimonial">
+            <p className="vc-login__quote">
+              V-Compass changed the trajectory of my career within 3 months.
+            </p>
+            <div className="vc-login__author">
+              <div className="vc-login__avatar">AK</div>
+              <div>
+                <span className="vc-login__author-name">Arjun Kumar</span>
+                <span className="vc-login__author-role">Software Engineer @ Google</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="vc-login__orb vc-login__orb--a" />
+        <div className="vc-login__orb vc-login__orb--b" />
+        <div className="vc-login__orb vc-login__orb--c" />
       </div>
 
-      <form onSubmit={submitHandler} className="w-full max-w-md z-10">
-        <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-8 relative overflow-hidden">
-          <div className="text-center mb-8">
-            <div className="flex justify-center mb-3">
-              <img src={logo} alt="Logo" className="w-20 h-20 object-contain" />
-            </div>
-            <h1 className="text-3xl font-bold text-amber-900 mb-2">Welcome Back</h1>
-            <p className="text-amber-700/80 text-sm font-medium">Login to continue</p>
+      {/* ── Right ── */}
+      <div className="vc-login__right">
+        <div className="vc-login__form-wrap">
+          <div>
+            <h2 className="vc-login__form-title">Welcome back</h2>
+            <p className="vc-login__form-sub">Sign in to continue your journey</p>
           </div>
 
-          {/* Email Field */}
-          <div className="mb-6">
-            <label className="block text-sm font-semibold text-amber-900 mb-1">
-              Email Address <span className="text-red-500">*</span>
-            </label>
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={emailChange}
-              required
-            />
-          </div>
-
-          {/* Password Field */}
-          <div className="mb-6 relative">
-            <label className="block text-sm font-semibold text-amber-900 mb-1">
-              Password <span className="text-red-500">*</span>
-            </label>
-            <div className="relative">
+          <form onSubmit={submitHandler} className="vc-login__form">
+            <div className="vc-login__field">
+              <label className="vc-login__label">Email Address</label>
               <Input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                value={password}
-                onChange={passwordChange}
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 required
-                className="pr-10"
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-amber-600/60 hover:text-amber-600"
-                tabIndex={-1}
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
             </div>
-          </div>
 
-          {/* Submit Button */}
-          <div className="mt-6">
-            <Button type="submit">
-              <LoadingButton loading={loading} title="Login" />
+            <div className="vc-login__field">
+              <label className="vc-login__label">Password</label>
+              <div className="vc-login__pw-wrap">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="vc-login__eye"
+                  onClick={() => setShowPassword(p => !p)}
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                </button>
+              </div>
+            </div>
+
+            <div className="vc-login__forgot-row">
+              <Link to="/forget/password" className="vc-login__forgot">
+                Forgot password?
+              </Link>
+            </div>
+
+            <Button type="submit" disabled={loading}>
+              <LoadingButton loading={loading} title="Sign In" />
+              {!loading && <ArrowRight size={17} />}
             </Button>
-          </div>
+          </form>
 
-          {/* Links */}
-          <div className="mt-6 flex flex-col sm:flex-row justify-between text-sm">
-            <Link
-              to="/register"
-              className="text-amber-700 hover:text-amber-800 font-medium hover:underline"
-            >
-              Create new account?
+          <p className="vc-login__register">
+            Don't have an account?{" "}
+            <Link to="/register" className="vc-login__register-link">
+              Create one free
             </Link>
-            <Link
-              to="/forget/password"
-              className="text-amber-700 hover:text-amber-800 font-medium hover:underline"
-            >
-              Forgot your password?
-            </Link>
-          </div>
+          </p>
 
-          {/* Terms */}
-          <p className="text-center mt-6 text-xs text-amber-700/60">
-            By signing in, you agree to our Terms of Service and Privacy Policy
+          <p className="vc-login__terms">
+            By signing in you agree to our{" "}
+            <a href="/terms">Terms</a> and{" "}
+            <a href="/privacy">Privacy Policy</a>.
           </p>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

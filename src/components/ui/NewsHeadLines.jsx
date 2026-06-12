@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Rss } from 'lucide-react';
 import apis from '../../utils/apis';
+import './NewsHeadlines.css';
 
 const NewsHeadlines = () => {
   const containerRef = useRef(null);
@@ -7,6 +9,7 @@ const NewsHeadlines = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [startY, setStartY] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
+  const animRef = useRef(null);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -15,100 +18,74 @@ const NewsHeadlines = () => {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
-        if (!response.ok) {
-          throw new Error('Failed to fetch News');
-        }
+        if (!response.ok) throw new Error('Failed to fetch news');
         const news = await response.json();
         setData(news);
       } catch (error) {
         console.error(error.message);
       }
     };
-
     fetchNews();
-
-    const intervalId = setInterval(fetchNews, 60 * 60 * 1000);
-
-    return () => clearInterval(intervalId);
+    const id = setInterval(fetchNews, 60 * 60 * 1000);
+    return () => clearInterval(id);
   }, []);
 
-  const headlines = data;
-
   useEffect(() => {
-    const scrollContainer = containerRef.current;
+    if (!data.length) return;
+    const el = containerRef.current;
+    if (!el) return;
 
-    const cloneHeadlines = () => {
-      scrollContainer.innerHTML += scrollContainer.innerHTML;
+    // Clone for seamless loop
+    el.innerHTML = '';
+    data.forEach(h => el.appendChild(makeItem(h)));
+    data.forEach(h => el.appendChild(makeItem(h)));
+
+    const step = () => {
+      if (!isDragging && el) {
+        el.scrollTop += 0.8;
+        if (el.scrollTop >= el.scrollHeight / 2) el.scrollTop = 0;
+      }
+      animRef.current = requestAnimationFrame(step);
     };
+    animRef.current = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animRef.current);
+  }, [data, isDragging]);
 
-    cloneHeadlines();
+  const makeItem = (text) => {
+    const div = document.createElement('div');
+    div.className = 'vc-news__item';
+    div.textContent = text;
+    return div;
+  };
 
-    const startScrolling = () => {
-      const step = () => {
-        if (!isDragging) {
-          scrollContainer.scrollTop += 1;
-          if (scrollContainer.scrollTop >= scrollContainer.scrollHeight / 2) {
-            scrollContainer.scrollTop = 0;
-          }
-        }
-        requestAnimationFrame(step);
-      };
-
-      requestAnimationFrame(step);
-    };
-
-    startScrolling();
-  }, [isDragging]);
-
-  const handleMouseDown = (e) => {
+  const onMouseDown = (e) => {
     setIsDragging(true);
-    setStartY(e.clientY - scrollTop);
+    setStartY(e.clientY);
     setScrollTop(containerRef.current.scrollTop);
   };
 
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      const dy = e.clientY - startY;
-      containerRef.current.scrollTop = scrollTop - dy;
-    }
+  const onMouseMove = (e) => {
+    if (!isDragging) return;
+    containerRef.current.scrollTop = scrollTop - (e.clientY - startY);
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
+  const onMouseUp = () => setIsDragging(false);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="text-xl font-bold text-[#8B5E3C] mb-2">Headlines</div>
-
+    <div className="vc-news">
+      <div className="vc-news__label">
+        <Rss size={14} strokeWidth={2} />
+        Live Headlines
+      </div>
       <div
         ref={containerRef}
-        className="relative w-[400px] h-96 overflow-hidden bg-[#FAF3E0] border-2 border-[#8B5E3C] mt-2 rounded-lg shadow-md"
-        style={{ display: 'flex', flexDirection: 'column' }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-      >
-        {headlines.map((headline, index) => (
-          <div
-            key={index}
-            className="p-2 text-center text-[#4A2C12] bg-[#FFF5EB] border-b border-[#8B5E3C]"
-            style={{ whiteSpace: 'normal' }}
-          >
-            {headline}
-          </div>
-        ))}
-        {headlines.map((headline, index) => (
-          <div
-            key={index + headlines.length}
-            className="p-2 text-center text-[#4A2C12] bg-[#FFF5EB] border-b border-[#8B5E3C]"
-            style={{ whiteSpace: 'normal' }}
-          >
-            {headline}
-          </div>
-        ))}
-      </div>
+        className="vc-news__feed"
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+        style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+      />
     </div>
   );
 };

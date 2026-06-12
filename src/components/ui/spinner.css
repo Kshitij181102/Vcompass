@@ -1,15 +1,13 @@
-.ui_spinner {
-  height: 1rem;
-  width: 1rem;
+.vc-spinner {
+  height: 1.05rem;
+  width: 1.05rem;
   border-radius: 50%;
-  border: 3px solid transparent;
-  border-top-color: #f59e0b;     /* amber-500 */
-  border-right-color: #f59e0b;
-  animation: loading 0.75s linear infinite;
+  border: 2.5px solid rgba(255, 255, 255, 0.28);
+  border-top-color: #ffffff;
+  animation: vc-spin 0.6s linear infinite;
+  flex-shrink: 0;
 }
 
-@keyframes loading {
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes vc-spin {
+  to { transform: rotate(360deg); }
 }

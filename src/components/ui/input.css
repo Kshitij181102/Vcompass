@@ -1,27 +1,42 @@
-.ui_input {
+.vc-input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background-color: rgba(255, 255, 255, 0.6); /* Slightly translucent white */
-  border: 2px solid rgba(245, 158, 11, 0.3); /* amber-400 base border */
-  border-radius: 0.75rem; /* Tailwind's rounded-xl */
+  padding: 0.82rem 1.1rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(245, 158, 11, 0.2);
+  border-radius: 13px;
   outline: none;
-  color: #78350f; /* Deep amber-900 text */
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.05);
-  backdrop-filter: blur(4px);
-  ::placeholder {
-    color: #92400eaa; /* amber-700 placeholder */
-  }
+  color: #1c0a00;
+  font-size: 0.925rem;
+  font-weight: 400;
+  font-family: 'Outfit', 'DM Sans', sans-serif;
+  transition: border-color 200ms ease,
+              background 200ms ease,
+              box-shadow 200ms ease,
+              transform 150ms ease;
+  box-sizing: border-box;
+  -webkit-appearance: none;
 }
 
-.ui_input:hover {
-  border-color: #f59e0b; /* amber-500 */
+.vc-input::placeholder {
+  color: rgba(180, 83, 9, 0.42);
+  font-weight: 400;
 }
 
-.ui_input:focus {
-  border-color: #f59e0b; /* amber-500 */
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.2); /* amber ring */
+.vc-input:hover {
+  border-color: rgba(245, 158, 11, 0.42);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.vc-input:focus {
+  border-color: #f59e0b;
+  background: #ffffff;
+  box-shadow: 0 0 0 3.5px rgba(245, 158, 11, 0.16),
+              0 1px 6px rgba(120, 53, 15, 0.06);
+  transform: translateY(-1px);
+}
+
+/* Remove number arrows */
+.vc-input[type="number"]::-webkit-inner-spin-button,
+.vc-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }

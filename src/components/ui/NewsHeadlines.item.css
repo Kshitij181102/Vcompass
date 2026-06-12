@@ -1,0 +1,14 @@
+/* This is injected via a <style> tag in index.css or globals.css */
+.vc-news__item {
+  padding: 0.875rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #78350f;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+  line-height: 1.5;
+  transition: background 200ms ease;
+}
+
+.vc-news__item:hover {
+  background: rgba(245, 158, 11, 0.05);
+}

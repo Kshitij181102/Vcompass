@@ -33,14 +33,10 @@ const Profile = () => {
     const fetchUserProfile = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem('accessToken');
-
             const response = await fetch(apis().getUserProfile, {
                 method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // accessToken cookie sent automatically
             });
 
             if (response.ok) {
@@ -104,21 +100,14 @@ const Profile = () => {
         }
 
         try {
-            const token = localStorage.getItem('accessToken');
             const updateData = { ...formData };
-
-            // Remove confirmPassword and empty password from request
             delete updateData.confirmPassword;
-            if (!updateData.password) {
-                delete updateData.password;
-            }
+            if (!updateData.password) delete updateData.password;
 
             const response = await fetch(apis().updateProfile, {
                 method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // accessToken cookie sent automatically
                 body: JSON.stringify(updateData)
             });
 

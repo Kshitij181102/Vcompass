@@ -1,14 +1,16 @@
 import React from 'react';
 import './Button.css';
 
-const Button = ({ onClick, type = "button", children }) => {
+const Button = ({ onClick, type = "button", children, variant = "primary", disabled }) => {
   return (
     <button
-      className="ui_button"
+      className={`vc-btn vc-btn--${variant}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
-      {children}
+      <span className="vc-btn__inner">{children}</span>
+      <span className="vc-btn__shine" aria-hidden="true" />
     </button>
   );
 };

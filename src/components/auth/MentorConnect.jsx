@@ -21,67 +21,35 @@ const MentorConnect = () => {
             try {
                 setBookingLoading(true);
                 setBookingError(null);
-                
-                const menteeId = localStorage.getItem('disId');
-                console.log('=== FETCH USER BOOKINGS DEBUG ===');
-                console.log('Retrieved menteeId from localStorage:', menteeId);
-                
+
+                const menteeId = sessionStorage.getItem('disId');
                 if (!menteeId) {
-                    console.log('No menteeId found in localStorage');
                     setBookingLoading(false);
                     return;
                 }
 
-                const apiUrl = `${apis().getUserBookings}/${menteeId}`;
-                console.log('Making API call to:', apiUrl);
-                
-                const response = await fetch(apiUrl, {
+                const response = await fetch(`${apis().getUserBookings}/${menteeId}`, {
                     method: "GET",
-                    headers: { 
-                        "Content-Type": "application/json",
-                        // Add any auth headers if needed
-                    },
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
                 });
-
-                console.log('API Response status:', response.status);
-                console.log('API Response ok:', response.ok);
 
                 if (response.ok) {
                     const result = await response.json();
-                    console.log('API Response data:', result);
-                    
                     setUserBookings(result.bookings || []);
-                    
-                    // Set booked mentor ID if user has active bookings
+
                     if (result.hasActiveBookings && result.bookings.length > 0) {
-                        const activeBooking = result.bookings[0]; // Get the first active booking
-                        console.log('Active booking found:', activeBooking);
-                        console.log('Setting booked mentor ID to:', activeBooking.mentorId);
-                        
-                        setBookedMentorId(activeBooking.mentorId);
-                        
-                        // Store in localStorage for consistency
-                        localStorage.setItem('bookedMentorId', activeBooking.mentorId);
-                        localStorage.setItem('bookingTime', Date.now().toString());
-                        
-                        console.log('Updated localStorage with booked mentor ID');
+                        setBookedMentorId(result.bookings[0].mentorId);
                     } else {
-                        console.log('No active bookings found');
-                        // Clear any stale booking data
-                        localStorage.removeItem('bookedMentorId');
-                        localStorage.removeItem('bookingTime');
                         setBookedMentorId(null);
-                        console.log('Cleared stale booking data from localStorage');
                     }
                 } else {
                     const errorText = await response.text();
-                    console.error('API Error response:', errorText);
                     const errorMessage = `Failed to fetch bookings: ${response.status}`;
                     setBookingError(errorMessage);
                     toast.error(errorMessage);
                 }
             } catch (error) {
-                console.error('Error fetching user bookings:', error);
                 const errorMessage = `Network error: ${error.message}`;
                 setBookingError(errorMessage);
                 toast.error(errorMessage);
@@ -90,9 +58,8 @@ const MentorConnect = () => {
             }
         };
 
-        // Add a small delay to ensure localStorage is ready
-        setTimeout(fetchUserBookings, 100);
-    }, []); // Empty dependency array - only run once on mount
+        fetchUserBookings();
+    }, []);
 
     useEffect(() => {
         const fetchMentors = async () => {
@@ -117,168 +84,97 @@ const MentorConnect = () => {
         return () => clearInterval(intervalId);
     }, []);
 
-    // Remove the localStorage check useEffect since we're now relying on server data
-    useEffect(() => {
-        console.log('=== BOOKING STATE DEBUG ===');
-        console.log('Current bookedMentorId:', bookedMentorId);
-        console.log('Current userBookings:', userBookings);
-        console.log('Booking loading:', bookingLoading);
-    }, [bookedMentorId, userBookings, bookingLoading]);
-
     const handleBookClick = async (id) => {
         if (!selectedTimeSlot && bookedMentorId !== id) {
             toast.warning('Please select a time slot before booking.');
             return;
         }
 
-        const selectedMentor = data.find((mentor) => mentor.id === id);
         const mentorId = id;
-        const menteeId = localStorage.getItem('disId');
-
-        console.log('=== BOOKING ACTION DEBUG ===');
-        console.log('Action for mentorId:', mentorId);
-        console.log('Current bookedMentorId:', bookedMentorId);
-        console.log('Selected time slot:', selectedTimeSlot);
+        const menteeId = sessionStorage.getItem('disId');
 
         setLoading(true);
 
         if (bookedMentorId === null) {
             // Booking a new mentor
-            console.log('Creating new booking...');
-            
             try {
                 const response = await fetch(apis().book, {
                     method: "POST",
-                    body: JSON.stringify({ 
-                        mentorId, 
-                        menteeId, 
-                        time: selectedTimeSlot
-                    }),
+                    body: JSON.stringify({ mentorId, menteeId, time: selectedTimeSlot }),
                     headers: { "Content-Type": "application/json" },
+                    credentials: "include",
                 });
 
                 const result = await response.json();
-                console.log('Booking response:', result);
 
-                if (!response.ok) {
-                    throw new Error(result?.message);
-                }
+                if (!response.ok) throw new Error(result?.message);
 
-                if (result?.status || result?.message === 'Booking updated successfully!' || result?.message?.includes('Successfully')) {
+                if (result?.status || result?.message?.includes('Successfully') || result?.message === 'Booking updated successfully!') {
                     setBookedMentorId(id);
-                    const bookingTime = Date.now();
-                    localStorage.setItem('bookedMentorId', id);
-                    localStorage.setItem('bookingTime', bookingTime.toString());
-                    
+
                     const scheduledIST = new Date(result.scheduledTimeIST);
-                    const dateStr = scheduledIST.toLocaleDateString();
-                    const timeStr = scheduledIST.toLocaleTimeString();
-                    
-                    let successMessage = `Booking successful for ${selectedTimeSlot}! Scheduled for: ${dateStr} at ${timeStr}`;
-                    
+                    let successMessage = `Booking successful for ${selectedTimeSlot}! Scheduled for: ${scheduledIST.toLocaleDateString()} at ${scheduledIST.toLocaleTimeString()}`;
                     if (!result.isNewBooking) {
                         successMessage += ` - You've joined a group session with ${result.totalMentees} total participants.`;
                     }
-                    
-                    toast.success(successMessage, {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                    });
+                    toast.success(successMessage, { position: "top-right", autoClose: 5000 });
 
-                    localStorage.setItem("disId", result?.disId || menteeId);
+                    // Update disId in sessionStorage if server returns updated one
+                    if (result?.disId) sessionStorage.setItem("disId", result.disId);
+
                     setSelectedTimeSlot('');
-                    
-                    // Update userBookings state
-                    const newBooking = {
+                    setUserBookings([{
                         bookingId: result.bookingId,
-                        mentorId: mentorId,
+                        mentorId,
                         scheduleTime: result.scheduledTimeUTC,
                         scheduleTimeIST: result.scheduledTimeIST,
                         totalMentees: result.totalMentees,
                         isActive: true
-                    };
-                    setUserBookings([newBooking]);
-                    
-                    console.log('Booking successful, updated state');
+                    }]);
                 }
             } catch (error) {
-                console.error('Booking error:', error);
-                toast.error(`Booking failed: ${error.message}`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                });
+                toast.error(`Booking failed: ${error.message}`, { position: "top-right", autoClose: 5000 });
             }
-            
+
         } else if (bookedMentorId === id) {
             // Canceling existing booking
-            console.log('Canceling existing booking...');
-            
-            // Using a custom toast for confirmation
             const confirmCancel = window.confirm('Are you sure you want to cancel your booking?');
-            
-            if (!confirmCancel) {
-                setLoading(false);
-                return;
-            }
+            if (!confirmCancel) { setLoading(false); return; }
 
             try {
                 const response = await fetch(apis().cancelBooking, {
                     method: "DELETE",
                     body: JSON.stringify({ mentorId, menteeId }),
                     headers: { "Content-Type": "application/json" },
+                    credentials: "include",
                 });
 
                 const result = await response.json();
-                console.log('Cancel response:', result);
 
-                if (!response.ok) {
-                    throw new Error(result?.message);
-                }
+                if (!response.ok) throw new Error(result?.message);
 
                 if (result?.status) {
-                     window.location.reload();
                     setBookedMentorId(null);
-                    localStorage.removeItem('bookedMentorId');
-                    localStorage.removeItem('bookingTime');
-                    
+                    setSelectedTimeSlot('');
+                    setUserBookings([]);
+
                     let successMessage = 'Booking cancelled successfully!';
-                    
                     if (result.remainingMentees > 0) {
                         successMessage += ` ${result.remainingMentees} other participants remain in this session.`;
                     }
-                    
-                    toast.success(successMessage, {
-                        position: "top-right",
-                        autoClose: 4000,
-                    });
-
-                    setSelectedTimeSlot('');
-                    setUserBookings([]);
-                   
-                    
-                    console.log('Cancellation successful, updated state');
-                 
+                    toast.success(successMessage, { position: "top-right", autoClose: 4000 });
+                    window.location.reload();
                 }
             } catch (error) {
-              
-                console.error('Cancellation error:', error);
-                toast.error(`Cancellation failed: ${error.message}`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                });
-                   window.location.reload();
+                toast.error(`Cancellation failed: ${error.message}`, { position: "top-right", autoClose: 5000 });
+                window.location.reload();
             }
         } else {
             toast.warning("You have already booked another mentor. Please cancel your current booking first.", {
-                position: "top-right",
-                autoClose: 4000,
+                position: "top-right", autoClose: 4000,
             });
         }
-        
+
         setLoading(false);
     };
 
