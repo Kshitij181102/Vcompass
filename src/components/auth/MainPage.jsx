@@ -98,6 +98,7 @@ const MainPage = () => {
   };
 
   useEffect(() => {
+    const apiList = apis();
     const fetchNews = async (page = 1, category = '') => {
       try {
         const queryParams = new URLSearchParams({ page: page.toString(), limit: '6' });
