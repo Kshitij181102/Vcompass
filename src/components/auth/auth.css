@@ -186,13 +186,14 @@
 /* OTP Inputs */
 .vc-otp-grid {
   display: flex;
-  gap: 0.6rem;
-  justify-content: space-between;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
 .vc-otp-input {
-  flex: 1;
-  height: 56px;
+  width: 48px;
+  height: 52px;
+  flex: 0 0 48px;        /* fixed width — no stretching */
   text-align: center;
   font-family: 'Playfair Display', serif;
   font-size: 1.35rem;
